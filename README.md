@@ -16,9 +16,8 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Arrays;
-import java.util.List;
 
-import com.crawlab.sdk.CrawlabSDK;
+import io.crawlab.sdk.CrawlabSDK;
 
 public class Main {
     public static void main(String[] args) {
@@ -46,15 +45,15 @@ public class Main {
 
         // Using varargs for multiple items
         CrawlabSDK.saveItem(
-            Map.of("name", "John", "age", 25),
-            Map.of("name", "Jane", "age", 30)
+                Map.of("name", "John", "age", 25),
+                Map.of("name", "Jane", "age", 30)
         );
 
         // Using custom objects
         public class Person {
             private String name;
             private int age;
-            
+
             // Constructor, getters, setters...
         }
 

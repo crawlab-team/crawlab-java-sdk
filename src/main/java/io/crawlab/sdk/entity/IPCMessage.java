@@ -1,4 +1,4 @@
-package com.crawlab.sdk.entity;
+package io.crawlab.sdk.entity;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

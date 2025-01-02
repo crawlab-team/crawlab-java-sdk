@@ -1,6 +1,6 @@
-package com.crawlab.sdk;
+package io.crawlab.sdk;
 
-import com.crawlab.sdk.entity.IPCMessage;
+import io.crawlab.sdk.entity.IPCMessage;
 
 public class CrawlabSDK {
     public static void saveItem(Object... items) {
