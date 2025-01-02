@@ -17,18 +17,21 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           server-id: ossrh  # Maven settings server id
-          server-username: MAVEN_USERNAME
-          server-password: MAVEN_PASSWORD
+          server-username: ${{ secrets.OSSRH_USERNAME }}
+          server-password: ${{ secrets.OSSRH_PASSWORD }}
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
-          gpg-passphrase: MAVEN_GPG_PASSPHRASE
+          gpg-passphrase: ${{ secrets.GPG_PASSPHRASE }}
 
       - name: Build and Test
         run: mvn clean test
         
-      - name: Publish to Maven Central
-        run: |
-          mvn clean deploy -P release
-        env:
-          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-          MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
-          MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }} 
+      - name: Cache Maven dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-m2-
+
+      - name: Build and Publish
+        run: mvn clean deploy -P release
