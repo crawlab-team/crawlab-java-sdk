@@ -1,0 +1,18 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="CrawlabSDKTest" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+    <module name="crawlab-java-sdk" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="com.crawlab.sdk.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <option name="PACKAGE_NAME" value="io.crawlab.sdk" />
+    <option name="MAIN_CLASS_NAME" value="io.crawlab.sdk.CrawlabSDKTest" />
+    <option name="METHOD_NAME" value="" />
+    <option name="TEST_OBJECT" value="class" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
