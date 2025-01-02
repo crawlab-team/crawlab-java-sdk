@@ -21,7 +21,6 @@ jobs:
           server-password: ${{ secrets.OSSRH_PASSWORD }}
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
           gpg-passphrase: ${{ secrets.GPG_PASSPHRASE }}
-          settings-path: ${{ github.workspace }}
 
       - name: Build and Test
         run: mvn clean test
@@ -67,4 +66,4 @@ jobs:
             EOF
 
       - name: Build and Publish
-        run: mvn clean deploy -P release
+        run: mvn clean deploy -P release -s ./settings.xml
