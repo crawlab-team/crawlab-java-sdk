@@ -120,9 +120,6 @@
                     </plugin>
                 </plugins>
             </build>
-            <properties>
-                <version>${project.version}</version>
-            </properties>
         </profile>
 
         <!-- Profile for Snapshot Version -->
@@ -170,9 +167,6 @@
                     </plugin>
                 </plugins>
             </build>
-            <properties>
-                <version>${project.version}-SNAPSHOT</version>
-            </properties>
         </profile>
     </profiles>
 </project>

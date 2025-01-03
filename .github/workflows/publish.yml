@@ -22,6 +22,14 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+      - name: Get version
+        id: get_version
+        run: echo "name=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_OUTPUT
+      - name: Pad run number
+        id: pad_run_number
+        run: echo "padded_run_number=$(printf '%04d' ${{ github.run_number }})" > $GITHUB_OUTPUT
+      - name: Set version
+        run: mvn versions:set -DnewVersion=${{ steps.get_version.outputs.version }}-SNAPSHOT-${{ steps.pad_run_number.outputs.padded_run_number }}
       - name: Publish package
         run: |
           mvn -P snapshot --batch-mode deploy
