@@ -24,6 +24,7 @@ class CrawlabSDKTest {
         String output = outputStreamCaptor.toString().trim();
 
         assertTrue(output.contains("\"type\":\"data\""));
+        assertTrue(output.contains("\"payload\":["));
         assertTrue(output.contains("\"name\":\"John\""));
         assertTrue(output.contains("\"age\":25"));
         assertTrue(output.contains("\"ipc\":true"));
@@ -36,6 +37,7 @@ class CrawlabSDKTest {
         String output = outputStreamCaptor.toString().trim();
 
         assertTrue(output.contains("\"type\":\"data\""));
+        assertTrue(output.contains("\"payload\":["));
         assertTrue(output.contains("\"name\":\"John\""));
         assertTrue(output.contains("\"age\":25"));
         assertTrue(output.contains("\"ipc\":true"));

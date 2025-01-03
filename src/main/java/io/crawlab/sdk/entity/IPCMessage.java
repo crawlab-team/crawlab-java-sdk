@@ -21,12 +21,12 @@ public class IPCMessage {
     }
 
     private final String type;
-    private final Object data;
+    private final Object payload;
     protected final Boolean ipc = true;
 
-    public IPCMessage(MessageType type, Object data) {
+    public IPCMessage(MessageType type, Object payload) {
         this.type = type.toString().toLowerCase();
-        this.data = data;
+        this.payload = payload;
     }
 
     public String toJSON() {
@@ -42,8 +42,8 @@ public class IPCMessage {
         return type;
     }
 
-    public Object getData() {
-        return data;
+    public Object getPayload() {
+        return payload;
     }
 
     public Boolean getIpc() {
