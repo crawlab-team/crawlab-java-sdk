@@ -24,7 +24,7 @@ jobs:
           distribution: 'temurin'
       - name: Get version
         id: get_version
-        run: echo "name=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_OUTPUT
+        run: echo "version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_OUTPUT
       - name: Pad run number
         id: pad_run_number
         run: echo "padded_run_number=$(printf '%04d' ${{ github.run_number }})" > $GITHUB_OUTPUT
@@ -52,8 +52,6 @@ jobs:
           server-password: MAVEN_PASSWORD
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
-      - name: Import GPG key
-        run: echo "${{ secrets.GPG_PRIVATE_KEY }}" | base64 --decode | gpg --import --batch
       - name: Set version
         run: mvn versions:set -DnewVersion=${{ github.event.release.tag_name }}
       - name: Publish package
