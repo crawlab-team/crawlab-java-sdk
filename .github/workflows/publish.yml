@@ -16,11 +16,9 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          server-id: ossrh  # Maven settings server id
+          server-id: central  # Maven settings server id
           server-username: ${{ secrets.OSSRH_USERNAME }}
           server-password: ${{ secrets.OSSRH_PASSWORD }}
-          gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
-          gpg-passphrase: ${{ secrets.GPG_PASSPHRASE }}
 
       - name: Build and Test
         run: mvn clean test
@@ -39,25 +37,12 @@ jobs:
           echo "<settings>
             <servers>
               <server>
-                <id>ossrh</id>
+                <id>central</id>
                 <username>${{ secrets.OSSRH_USERNAME }}</username>
                 <password>${{ secrets.OSSRH_PASSWORD }}</password>
               </server>
             </servers>
-            <profiles>
-              <profile>
-                <id>release</id>
-                <properties>
-                  <gpg.executable>gpg</gpg.executable>
-                  <gpg.passphrase>${{ secrets.GPG_PASSPHRASE }}</gpg.passphrase>
-                </properties>
-              </profile>
-            </profiles>
-        
-            <activeProfiles>
-              <activeProfile>release</activeProfile>
-            </activeProfiles>
           </settings>" > ~/.m2/settings.xml
 
       - name: Build and Publish
-        run: mvn clean deploy -P release
+        run: mvn clean deploy
