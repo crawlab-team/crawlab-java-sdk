@@ -78,19 +78,6 @@ jobs:
         env:
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
 
-      - name: Set up GPG
-        run: |
-          # Ensure directory exists
-          mkdir -p ~/.gnupg/
-          
-          # Configure GPG
-          echo "allow-loopback-pinentry" > ~/.gnupg/gpg-agent.conf
-          echo "pinentry-mode loopback" > ~/.gnupg/gpg.conf
-          
-          # Set permissions
-          chmod 700 ~/.gnupg
-          chmod 600 ~/.gnupg/*
-
       - name: Set GPG_TTY
         run: export GPG_TTY=$(tty)
 
