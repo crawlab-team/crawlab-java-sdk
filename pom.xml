@@ -10,11 +10,11 @@
 
     <name>Crawlab SDK</name>
     <description>Crawlab SDK for Java</description>
-    <url>https://github.com/crawlab-team/crawlab-sdk-java</url>
+    <url>https://github.com/crawlab-team/crawlab-java-sdk</url>
     <licenses>
         <license>
             <name>BSD 3-Clause License</name>
-            <url>https://github.com/crawlab-team/crawlab-sdk-java/blob/main/LICENSE</url>
+            <url>https://github.com/crawlab-team/crawlab-java-sdk/blob/main/LICENSE</url>
         </license>
     </licenses>
     <developers>
