@@ -21,9 +21,6 @@ jobs:
           server-password: ${{ secrets.OSSRH_PASSWORD }}
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
           gpg-passphrase: ${{ secrets.GPG_PASSPHRASE }}
-
-      - name: Build and Test
-        run: mvn clean test
         
       - name: Cache Maven dependencies
         uses: actions/cache@v3
@@ -45,6 +42,15 @@ jobs:
               </server>
             </servers>
           </settings>" > ~/.m2/settings.xml
+
+      - name: Set GPG_TTY
+        run: echo "export GPG_TTY=$(tty)" >> $GITHUB_ENV
+
+      - name: Reload gpg-agent
+        run: gpg-connect-agent reloadagent /bye
+
+      - name: Build and Test
+        run: mvn clean test
 
       - name: Build and Publish
         run: mvn clean deploy
