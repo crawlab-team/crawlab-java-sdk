@@ -5,7 +5,7 @@
 
     <groupId>io.crawlab</groupId>
     <artifactId>crawlab-sdk</artifactId>
-    <version>0.7.0-SNAPSHOT</version>
+    <version>${project.version}</version>
     <packaging>jar</packaging>
 
     <name>Crawlab SDK</name>
@@ -30,22 +30,10 @@
         <url>https://github.com/crawlab-team/crawlab-java-sdk</url>
     </scm>
 
-    <distributionManagement>
-        <repository>
-            <id>central</id>
-            <name>Central Repository</name>
-            <url>https://central.sonatype.com/content/repositories/releases</url>
-        </repository>
-        <snapshotRepository>
-            <id>central</id>
-            <name>Central Snapshots</name>
-            <url>https://central.sonatype.com/content/repositories/snapshots</url>
-        </snapshotRepository>
-    </distributionManagement>
-
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+        <project.version>0.7.0</project.version>
     </properties>
 
     <dependencies>
@@ -133,7 +121,7 @@
                 </plugins>
             </build>
             <properties>
-                <version>0.7.0</version>
+                <version>${project.version}</version>
             </properties>
         </profile>
 
@@ -187,7 +175,7 @@
                 </plugins>
             </build>
             <properties>
-                <version>0.7.0-SNAPSHOT</version>
+                <version>${project.version}-SNAPSHOT</version>
             </properties>
         </profile>
     </profiles>
