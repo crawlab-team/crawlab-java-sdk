@@ -78,9 +78,6 @@ jobs:
         env:
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
 
-      - name: Set GPG_TTY
-        run: export GPG_TTY=$(tty)
-
       - name: Reload gpg-agent
         run: gpg-connect-agent reloadagent /bye
 
@@ -88,4 +85,6 @@ jobs:
         run: mvn clean test
 
       - name: Build and Publish to Maven Central and GitHub Packages
-        run: mvn clean deploy -P ossrh,github -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }}
+        run: |
+          export GPG_TTY=$(tty)
+          mvn clean deploy -P ossrh,github -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }}
