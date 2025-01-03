@@ -1,30 +1,4 @@
-# Crawlab Java SDK
-
-This is the Java SDK for Crawlab.
-
-## Installation
-
-```bash
-# Install dependencies with Maven
-mvn clean install
-```
-
-## Usage
-
-Add the following dependency to your `pom.xml` file:
-
-```xml
-<dependency>
-    <groupId>io.crawlab</groupId>
-    <artifactId>sdk</artifactId>
-    <version>1.0.0</version>
-</dependency>
-```
-
-Then you can use the SDK in your Java code:
-
-```java
-package com.example;
+package io.crawlab.example;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -79,4 +53,3 @@ public class Main {
         CrawlabSDK.saveItem(person1, person2);
     }
 }
-```
