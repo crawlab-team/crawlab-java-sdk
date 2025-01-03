@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.Arrays;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.crawlab.sdk.CrawlabSDK;
 
 public class Main {
@@ -24,20 +25,15 @@ public class Main {
         dataList.add(Map.of("name", "Jane", "age", 30));
         CrawlabSDK.saveItem(dataList);
 
-        // Passing Dynamic Arguments
+        // Passing a Map directly
         Map<String, Object> dataMap = new HashMap<>();
         dataMap.put("name", "John");
         dataMap.put("age", 25);
         dataMap.put("skills", Arrays.asList("Java", "Python"));
         CrawlabSDK.saveItem(dataMap);
 
-        // Using varargs for multiple items
-        CrawlabSDK.saveItem(
-                Map.of("name", "John", "age", 25),
-                Map.of("name", "Jane", "age", 30)
-        );
-
         // Using custom objects
+        @JsonSerialize
         class Person {
             private String name;
             private int age;
@@ -46,8 +42,15 @@ public class Main {
                 this.name = name;
                 this.age = age;
             }
-        }
 
+            public String getName() {
+                return name;
+            }
+
+            public int getAge() {
+                return age;
+            }
+        }
         Person person1 = new Person("John", 25);
         Person person2 = new Person("Jane", 30);
         CrawlabSDK.saveItem(person1, person2);
