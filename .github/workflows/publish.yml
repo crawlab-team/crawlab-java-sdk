@@ -100,10 +100,6 @@ jobs:
           # Set permissions
           chmod 700 ~/.gnupg
           chmod 600 ~/.gnupg/*
-          
-          # Kill existing agent if any and restart
-          gpgconf --kill all || true
-          gpg-agent --daemon --allow-preset-passphrase
 
       - name: Set GPG_TTY
         run: export GPG_TTY=$(tty)
