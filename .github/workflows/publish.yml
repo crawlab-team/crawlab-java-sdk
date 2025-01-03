@@ -94,19 +94,19 @@ jobs:
           mkdir -p ~/.gnupg/
           
           # Configure GPG
-          echo "allow-loopback-pinentry" >> ~/.gnupg/gpg-agent.conf
-          echo "pinentry-mode loopback" >> ~/.gnupg/gpg.conf
+          echo "allow-loopback-pinentry" > ~/.gnupg/gpg-agent.conf
+          echo "pinentry-mode loopback" > ~/.gnupg/gpg.conf
           
           # Set permissions
           chmod 700 ~/.gnupg
           chmod 600 ~/.gnupg/*
           
-          # Restart agent
-          gpgconf --kill gpg-agent
-          gpg-agent --daemon
+          # Kill existing agent if any and restart
+          gpgconf --kill all || true
+          gpg-agent --daemon --allow-preset-passphrase
 
       - name: Set GPG_TTY
-        run: echo "GPG_TTY=$(tty)" >> $GITHUB_ENV
+        run: export GPG_TTY=$(tty)
 
       - name: Reload gpg-agent
         run: gpg-connect-agent reloadagent /bye
