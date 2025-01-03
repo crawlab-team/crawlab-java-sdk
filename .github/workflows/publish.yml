@@ -1,9 +1,14 @@
-name: Publish to Maven Central and GitHub Packages
+name: Publish to Maven Central
 
 on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
+  release:
+    types: [published]
 
 jobs:
   publish:
@@ -11,7 +16,19 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Setup
+        id: setup
+        run: |
+          # set PROFILE according to the event
+          if [ -n "${{ github.event.release }}" ]; then
+              echo "PROFILE=release" >> $GITHUB_ENV
+          else
+              echo "PROFILE=snapshot" >> $GITHUB_ENV
+          fi
+          echo "PROFILE: ${PROFILE}"
+
       - name: Set up Maven Central Repository
+        id: setup-maven
         uses: actions/setup-java@v4
         with:
           java-version: '17'
@@ -23,7 +40,8 @@ jobs:
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
 
       - name: Publish package
-        run: mvn -P release --batch-mode deploy
+        run: |
+          mvn -P ${{ env.PROFILE }} --batch-mode deploy
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
