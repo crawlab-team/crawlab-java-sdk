@@ -74,17 +74,7 @@ jobs:
 
       - name: Import GPG key
         run: |
-          # Create GPG directory
-          mkdir -p ~/.gnupg/
-          chmod 700 ~/.gnupg/
-          
-          # Write key to file first
-          echo "${{ secrets.GPG_PRIVATE_KEY }}" > ~/private-key.asc
-          gpg --batch --import ~/private-key.asc
-          rm ~/private-key.asc  # Clean up
-          
-          # Verify the key was imported
-          gpg --list-secret-keys --keyid-format LONG
+          echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --batch --import
         env:
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
 
